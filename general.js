@@ -73,10 +73,10 @@ function mouvement(event) {
 // Souris Joueur
 
 function playerSouris1() {
-    player.innerHTML = " o/\n/| \n/ \\"
+    player.innerHTML = " ♥/\n/| \n/ \\"
 }
 function playerSouris2() {
-    player.innerHTML = " o \n/|\\\n/ \\"
+    player.innerHTML = " ♤ \n/|\\\n/ \\" //normal
 }
 
 // Check target et joueur
