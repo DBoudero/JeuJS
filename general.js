@@ -1,15 +1,3 @@
-// Sound effect
-
-function playSoundClick1() {
-    var audio = new Audio('sounds/Click1.mp3');
-    audio.play();
-}
-
-function playSoundClick2() {
-    var audio = new Audio('sounds/Click2.mp3');
-    audio.play();
-}
-
 // Mouvement
 
 const player = document.querySelector('#player');
@@ -62,13 +50,18 @@ function mouvement(event) {
             break;
         case "ArrowLeft":
             IS_MOVING_LEFT = event.type === "keydown";
+            if(flagAnimationGauche==false){
+                let animationGaucheID = setInterval(animationMarcheGauche, 150);
+                flagAnimationGauche = true;
+            }
             break;
         case "ArrowRight":
             IS_MOVING_RIGHT = event.type === "keydown";
-            let animationDroiteID = setInterval(animationMarcheDroite, 150);
-            break;
-        default:
-            clearInterval(animationDroiteID);
+            if(flagAnimationDroite==false){
+                let animationDroiteID = setInterval(animationMarcheDroite, 150);
+                flagAnimationDroite = true;
+            }
+        break;
     }
 }
 
@@ -106,21 +99,28 @@ function targetMove() {
 
 function playerSouris1() {
     player.innerHTML = " ♥/\n/| \n/ \\"
+    var audio = new Audio('sounds/Click1.mp3');
+    audio.play();
 }
 function playerSouris2() {
-    player.innerHTML = " ♤ \n/|\\\n/ \\" //normal
+    player.innerHTML = " ♥ \n/|\\\n/ \\" //normal
+    var audio = new Audio('sounds/Click2.mp3');
+    audio.play();
 }
 
-let repos = " ♤ \n/|\\\n/ \\" // Repos
-let animationMarcheDroite1 = " ♤ \n/|\\\n >\\"
-let animationMarcheDroite2 = " ♤ \n/|\\\n |>"
-let animationMarcheDroite3 = " ♤ \n/|\\\n/ >"
-let animationMarcheDroite4 = " ♤ \n/|\\\n/ \\"
+let repos = " ♥ \n/|\\\n/ \\" // Repos
+let animationMarcheDroite1 = " ♥ \n/|\\\n >\\"
+let animationMarcheDroite2 = " ♥ \n/|\\\n |>"
+let animationMarcheDroite3 = " ♥ \n/|\\\n/ >"
+let animationMarcheDroite4 = " ♥ \n/|\\\n/ \\"
 
+let animationMarcheGauche1 = " ♥ \n/|\\\n/< "
+let animationMarcheGauche2 = " ♥ \n/|\\\n<| "
+let animationMarcheGauche3 = " ♥ \n/|\\\n< \\"
+let animationMarcheGauche4 = " ♥ \n/|\\\n/ \\"
 
+let flagAnimationDroite = false
 let iAnimationMarcheDroite = 0
-
-
 function animationMarcheDroite(){
     iAnimationMarcheDroite++
     if(iAnimationMarcheDroite > 4)
@@ -145,22 +145,69 @@ function animationMarcheDroite(){
     }
 }
 
-/* animation de marche
+let flagAnimationGauche = false
+let iAnimationMarcheGauche = 0
+function animationMarcheGauche(){
+    iAnimationMarcheGauche++
+    if(iAnimationMarcheGauche > 4)
+    {
+        iAnimationMarcheGauche = 1
+    }
+    if(iAnimationMarcheGauche == 1)
+    {
+        player.innerHTML = animationMarcheGauche1
+    }
+    if(iAnimationMarcheGauche == 2)
+    {
+        player.innerHTML = animationMarcheGauche2
+    }
+    if(iAnimationMarcheGauche == 3)
+    {
+        player.innerHTML = animationMarcheGauche3
+    }
+    if(iAnimationMarcheGauche == 4)
+    {
+        player.innerHTML = animationMarcheGauche4
+    }
+}
 
- ♤
+
+/* animation de marche droite
+
+ ♥
 /|\
 / \
 
- ♤
+ ♥
 /|\
  >\
 
- ♤
+ ♥
 /|\
  |>
 
- ♤
+ ♥
 /|\
 / >
+
+*/
+
+/* animation de marche gauche
+
+ ♥
+/|\
+/ \
+
+ ♥
+/|\
+/<
+
+ ♥
+/|\
+<|
+
+ ♥
+/|\
+< \
 
 */
