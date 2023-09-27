@@ -3,6 +3,7 @@
 const player = document.querySelector('#player');
 const target = document.querySelector('#target');
 const body = document.querySelector('body');
+
 let fontSize = player.style.fontSize
 let position = { x: generateRandomNumber(0, 100 - player.offsetWidth / document.documentElement.clientWidth * 100), y: generateRandomNumber(0, 100 - player.offsetHeight / document.documentElement.clientHeight * 100) };
 let IS_MOVING_RIGHT = false
@@ -71,7 +72,7 @@ target.style.left = `${generateRandomNumber(0, 100 - target.offsetWidth / docume
 target.style.top = `${generateRandomNumber(0, 100 - target.offsetHeight / document.documentElement.clientHeight * 100)}%`
 var score = 0
 
-
+//collisions, true if collision
 function elementsOverlap(div1, div2) {
     const domRect1 = div1.getBoundingClientRect();
     const domRect2 = div2.getBoundingClientRect();
@@ -84,6 +85,7 @@ function elementsOverlap(div1, div2) {
     );
 }
 
+//random numbre
 function generateRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
