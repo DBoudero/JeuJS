@@ -42,7 +42,6 @@ function deplacement() {
         targetMove()
     }
 
-
     player.style.left = `${position.x}%`
     player.style.top = `${position.y}%`
 
@@ -66,18 +65,13 @@ function mouvement(event) {
             break;
         case "ArrowRight":
             IS_MOVING_RIGHT = event.type === "keydown";
+            let animationDroiteID = setInterval(animationMarcheDroite, 150);
             break;
+        default:
+            clearInterval(animationDroiteID);
     }
 }
 
-// Souris Joueur
-
-function playerSouris1() {
-    player.innerHTML = " ♥/\n/| \n/ \\"
-}
-function playerSouris2() {
-    player.innerHTML = " ♤ \n/|\\\n/ \\" //normal
-}
 
 // Check target et joueur
 target.style.left = `${generateRandomNumber(0, 100 - target.offsetWidth / document.documentElement.clientWidth * 100)}%`
@@ -107,3 +101,66 @@ function targetMove() {
     score++
     document.title = "Score : " + score
 }
+
+// Animations Joueur
+
+function playerSouris1() {
+    player.innerHTML = " ♥/\n/| \n/ \\"
+}
+function playerSouris2() {
+    player.innerHTML = " ♤ \n/|\\\n/ \\" //normal
+}
+
+let repos = " ♤ \n/|\\\n/ \\" // Repos
+let animationMarcheDroite1 = " ♤ \n/|\\\n >\\"
+let animationMarcheDroite2 = " ♤ \n/|\\\n |>"
+let animationMarcheDroite3 = " ♤ \n/|\\\n/ >"
+let animationMarcheDroite4 = " ♤ \n/|\\\n/ \\"
+
+
+let iAnimationMarcheDroite = 0
+
+
+function animationMarcheDroite(){
+    iAnimationMarcheDroite++
+    if(iAnimationMarcheDroite > 4)
+    {
+        iAnimationMarcheDroite = 1
+    }
+    if(iAnimationMarcheDroite == 1)
+    {
+        player.innerHTML = animationMarcheDroite1
+    }
+    if(iAnimationMarcheDroite == 2)
+    {
+        player.innerHTML = animationMarcheDroite2
+    }
+    if(iAnimationMarcheDroite == 3)
+    {
+        player.innerHTML = animationMarcheDroite3
+    }
+    if(iAnimationMarcheDroite == 4)
+    {
+        player.innerHTML = animationMarcheDroite4
+    }
+}
+
+/* animation de marche
+
+ ♤
+/|\
+/ \
+
+ ♤
+/|\
+ >\
+
+ ♤
+/|\
+ |>
+
+ ♤
+/|\
+/ >
+
+*/
