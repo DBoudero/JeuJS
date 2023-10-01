@@ -9,7 +9,10 @@ let position = { x: generateRandomNumber(0, 100 - player.offsetWidth / document.
 let IS_MOVING_RIGHT = false
 let IS_MOVING_LEFT = false
 let IS_MOVING_UP = false
+let IS_JUMPING = false
 let IS_MOVING_DOWN = false
+
+let velocite = 0
 
 window.requestAnimationFrame(deplacement)
 
@@ -20,11 +23,48 @@ function deplacement() {
     if (IS_MOVING_LEFT & position.x > 0) { // ne doit pas passer en dessous de 0
         position.x--;
     }
+    
     if (IS_MOVING_DOWN & position.y < 100 - player.offsetHeight / document.documentElement.clientHeight * 100) {
         position.y++;
     }
     if (IS_MOVING_UP & position.y > 0) { // ne doit pas passer en dessous de 0
         position.y--;
+    }
+    
+    
+    /*Gravité et Saut
+    if (position.y < 100 - player.offsetHeight / document.documentElement.clientHeight * 100 & !IS_JUMPING) {
+        position.y = position.y + 3;
+    }
+    if (IS_JUMPING & position.y > 0) { // ne doit pas passer en dessous de 0
+        if(position.y > 20){
+            velocite = 1
+        }
+        if(position.y > 50){
+            velocite = 2
+        }
+        if(position.y > 70){
+            velocite = 3
+        }
+        position.y = position.y - velocite;
+    }
+    */
+
+    console.log(position.y)
+
+
+
+    if(!IS_MOVING_RIGHT & flagAnimationDroite)
+    {
+        clearInterval(animationDroiteID);
+        flagAnimationDroite = false;
+        player.innerHTML = repos
+    }
+    if(!IS_MOVING_LEFT & flagAnimationGauche)
+    {
+        clearInterval(animationGaucheID);
+        flagAnimationGauche = false;
+        player.innerHTML = repos
     }
 
     if (elementsOverlap(player, target)){
@@ -52,14 +92,14 @@ function mouvement(event) {
         case "ArrowLeft":
             IS_MOVING_LEFT = event.type === "keydown";
             if(flagAnimationGauche==false){
-                let animationGaucheID = setInterval(animationMarcheGauche, 150);
+                animationGaucheID = setInterval(animationMarcheGauche, 150);
                 flagAnimationGauche = true;
             }
             break;
         case "ArrowRight":
             IS_MOVING_RIGHT = event.type === "keydown";
             if(flagAnimationDroite==false){
-                let animationDroiteID = setInterval(animationMarcheDroite, 150);
+                animationDroiteID = setInterval(animationMarcheDroite, 150);
                 flagAnimationDroite = true;
             }
         break;
@@ -211,5 +251,20 @@ function animationMarcheGauche(){
  ♥
 /|\
 < \
+
+*/
+
+
+/* animation saut
+
+\♥/
+ |
+/ \
+
+
+ ♥
+/|\
+< >
+
 
 */
